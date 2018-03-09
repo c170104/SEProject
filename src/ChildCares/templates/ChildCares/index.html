@@ -1,38 +1,32 @@
 {% extends "common/header.html" %} 
 
 {% block content %}
-    <table class="table">
+<div class="container">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <!-- <th scope="col">#</th> -->
                 <th scope="col">Name</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Programmes Offered</th>
+                <th scope="col">Fees</th>
+                <th scope="col">Age From</th>
+                <th scope="col">Age To</th>
+                <th scope="col">Remarks</th>
             </tr>
         </thead>
         <tbody>
+            {% for c in content %}
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <!-- <th scope="row">{{ forloop.counter }}</th> -->
+                <td>{{ c.centre_name }}</td>
+                <td>{{ c.programmes_offered }}</td>
+                <td>{{ c.fees }}</td>
+                <td>{{ c.age_from }}</td>
+                <td>{{ c.age_to }}</td>
+                <td>{{ c.remarks }}</td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
-
-    {% for c in content %}
-        <p>{{ c }}</p>
-    {% endfor %}
+</div>
 {% endblock %}
