@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Villians ChildCare App</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load staticfiles  %}
+    <link rel='stylesheet' href="{% static 'common/css/bootstrap.min.css' %}" type='text/css' />
+    <script scr="{% static 'common/js/bootstrap.min.js' %}" crossorigin="anonymous"></script>
+
+    <Title>ChildCareApp</Title>
+</head>
+
+<body class="body" style="background-color:#f6f6f6">
+    <!-- <div class="container">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8000/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8000/about">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8000/childcares">Child Care Locations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8000/contact">Contact Us</a>
+            </li>
+        </ul>
+    </div> -->
+    
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">Villians</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% if active_page == 'home' %} active {% endif %}">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item {% if active_page == 'about' %} active {% endif %}">
+                <a class="nav-link" href="/about">About Us</a>
+            </li>
+            <li class="nav-item {% if active_page == 'childcares' %} active {% endif %}">
+                <a class="nav-link" href="/childcares">Child Care List</a>
+            </li>
+            <li class="nav-item {% if active_page == 'contact' %} active {% endif %}">
+                <a class="nav-link" href="/contact">Contact Us</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+
+    <main role="main">
+        {% block content %} {% endblock %}
+    </main>
+
+    <hr>
+
+    <footer class="container">
+        NTU Software Engineering Project Villians
+    </footer>
+</body>
+
+</html>
