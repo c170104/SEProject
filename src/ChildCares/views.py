@@ -24,17 +24,10 @@ def index(request):
     else:
         itemStart = 0
         itemEnd = 20
-<<<<<<< HEAD
     pages = int(len(results) / 20)
     results = results[itemStart:itemEnd]
     
     return render(request, 'ChildCares/index.html', {'active_page': 'childcares','content': results, 'page_number': int(pageNumber), 'pages': range(pages)})
-=======
-
-    results = results[itemStart:itemEnd]
-    
-    return render(request, 'ChildCares/index.html', {'active_page': 'childcares','content': results})
->>>>>>> 0142a0338a25e237b7feca0327c6c43d3dcd8e2a
 
 def filter(request):
     return render(request, 'ChildCares/index.html', {'active_page': 'childcares', 'content': ["FILTERED DATA HERE"]})

@@ -25,14 +25,10 @@ SECRET_KEY = '$$$7e((ad8xv_xvem2&z-g%xxv6xmw2m-qt%v*&dx&%y*0xwi1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = [
     '10.10.10.10',
     'localhost'
     ]
-=======
-ALLOWED_HOSTS = ['10.10.10.10']
->>>>>>> 0142a0338a25e237b7feca0327c6c43d3dcd8e2a
 
 
 # Application definition
