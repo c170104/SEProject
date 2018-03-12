@@ -1,20 +1,16 @@
-from django.shortcuts import render
-import urllib
-import json
+from django.shortcuts import render, redirect
+from . import apidata
+
 import sys
 
 # Create your views here.
-url = "https://data.gov.sg/api/action/datastore_search?resource_id=0c14ceec-da1b-43c6-92fc-e82d7219840b"
+globaldata = None
 
 def index(request):
     # data API
     query = request.GET.get('q', '')
-    new_URL = url + "&q=" + query
-    req = urllib.request.Request(new_URL, headers={'User-Agent': 'Mozilla/5.0'})
-    with urllib.request.urlopen(req) as response:
-        fileObj = json.loads(response.read().decode('utf-8'))
-        response.close()
-    results = fileObj['result']['records']
+    results = apidata.main(query)
+    globaldata = results
 
     # pagination
     pageNumber = request.GET.get('p', '1')
@@ -29,7 +25,12 @@ def index(request):
     
     return render(request, 'ChildCares/index.html', {'active_page': 'childcares','content': results, 'page_number': int(pageNumber), 'pages': range(pages)})
 
-def filter(request):
-    return render(request, 'ChildCares/index.html', {'active_page': 'childcares', 'content': ["FILTERED DATA HERE"]})
-
+def moreinfo(request):
+    #
+    getPage = request.GET.get('p', '')
+    getDataId = request.GET.get('i', '')
+    print(globaldata)
+    if(getPage != '' and getDataId != ''):   
+        return render(request, 'ChildCares/moreinfo.html', {'content': globaldata[getPage*20+getDataId]})
+    return redirect('/')
     

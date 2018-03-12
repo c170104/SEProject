@@ -1,0 +1,9 @@
+{% extends "common/header.html" %} 
+
+{% block content %}
+    <div class="container">
+        {% for c in content %}
+            {{ c }}
+        {% endfor %}
+    </div>
+{% endblock %}
