@@ -2,47 +2,125 @@
 
 {% block content %}
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ content.0.centre_code }}</h5>
-                        <p class="card-text">
-                            <h6>{{ content.0.centre_name }}</h6> </br>
-                            <div class="row">
-                                <div class="col-md-4">
-                                </div>
-                                <div class="col-md-4">
-                                    <b></b>
-                                </div>
-                                <div class="col-md-4">
-                                    <b>Contact</b></br>
-                                    Tel No. {{ content.0.centre_contact_no }} </br>
-                                    Email {{ content.0.centre_email_address }}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                </div>
-                                <div class="col-md-4">
-                                    <b></b>
-                                </div>
-                                <div class="col-md-4">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                </div>
-                                <div class="col-md-4">
-                                    <b></b>
-                                </div>
-                                <div class="col-md-4">
-                                </div>
-                            </div>
-                        </p>
-                    </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="container">
+                    <h2 class="card-title">{{ content.0.centre_code }}</h2>
                 </div>
+                <p class="card-text">
+                    <div class="container">
+                        <h3>{{ content.0.centre_name }}</h3> </br>
+                    </div>
+                    <div class="container mb-4">
+                        <h4>Information</h4>
+                        <div class="row">
+                            <div class="col-md">
+                                <b>Goverment Subsidy</b></br>
+                                {{ content.0.government_subsidy }} </br>
+                                <b>Food Offered</b></br>
+                                {{ content.0.food_offered }} </br>
+                                <b>Second Language Offered</b> </br>
+                                {{ content.0.second_languages_offered }} </br>
+                                <b>Spark Certified</b></br>
+                                {{ content.0.spark_certified }} </br>
+                                <b>Scheme Type</b> </br>
+                                {{ content.0.scheme_type }} </br>
+                                <b>ICCP</b></br>
+                                {{ content.0.iccp }} </br>
+                                <b>GST Registration</b></br>
+                                {{ content.0.gst_regisration }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container mb-4">
+                        <h4>Fees</h4>
+                        <div class="row">
+                        {% for c in content %}
+                            <div class="col-sm">
+                                <b>{{ c.citizenship }}</b></br>
+                                {{ c.fees }}
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                    <div class="container mb-4">
+                        <h4>Vacancy</h4>
+                        <div class="row">
+                            <div class="col-sm">
+                                <b>Infant</b></br>
+                                {{ content.0.infant_vacancy }}
+                            </div>
+                            <div class="col-sm">
+                                <b>PG</b></br>
+                                {{content.0.pg_vacancy}}
+                            </div>
+                            <div class="col-sm">
+                                <b>N1</b>
+                                </br>
+                                {{content.0.n1_vacancy}}
+                            </div>
+                            <div class="col-sm">
+                                <b>N2</b>
+                                </br>
+                                {{content.0.n2_vacancy}}
+                            </div>
+                            <div class="col-sm">
+                                <b>K1</b>
+                                </br>
+                                {{content.0.k1_vacancy}}
+                            </div>
+                            <div class="col-sm">
+                                <b>K2</b>
+                                </br>
+                                {{content.0.k2_vacancy}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container mb-4">
+                        <h4>Timings</h4>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <b>Weekday Full Day</b> </br>
+                                {{ content.0.weekday_full_day }}
+                            </div>
+                            <div class="col-md-3">
+                                <b>Weekday Halfday (AM)</b></br>
+                                {{ content.0.weekday_halfday_am }}
+                            </div>
+                            <div class="col-md-3">
+                                <b>Weekday Halfday (PM)</b></br>
+                                {{ content.0.weekday_halfday_pm }}
+                            </div>
+                            <div class="col-md-3">
+                                <b>Saturday</b></br>
+                                {{ content.0.saturday }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container mb-4">
+                        <h4>Contact Info</h4>
+                        <div class="row">
+                            <div class="col">
+                                <b>Website:</b> {{ content.0.centre_website }} </br>
+                                <b>Tel No:</b> {{ content.0.centre_contact_no }} </br>
+                                <b>Email:</b> {{ content.0.centre_email_address }} </br>
+                                {% if content.0.centre_address == '' %}<b>Postal Code:</b> SINGAPORE<div id="postal_code">{{ content.0.postal_code }}</div> {% else %}<b>Address:</b> <div id="address">{{ content.0.centre_address }}</div> {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container mb-4">
+                        <h4>Google Map</h4>
+                        <div class="row">
+                            <div id="map" style="width:1100px; height: 300px;">
+                            </div>
+                        </div>
+                    </div>
+                </p>
             </div>
         </div>
     </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZYP8lJtnTmatEBazCSE3Tf10KmfnvcBw"></script>
+    {% load staticfiles %}
+    <script src="{% static 'ChildCares/js/gmap.js' %}"></script>
+    
 {% endblock %}
