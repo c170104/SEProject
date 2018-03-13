@@ -4,10 +4,6 @@ from . import apidata
 import sys
 
 # Create your views here.
-<<<<<<< HEAD
-=======
-url = "https://data.gov.sg/api/action/datastore_search?resource_id=0c14ceec-da1b-43c6-92fc-e82d7219840b"
->>>>>>> origin/master
 
 def index(request):
     # data API
@@ -26,12 +22,6 @@ def index(request):
     results = results[itemStart:itemEnd]
     
     return render(request, 'ChildCares/index.html', {'active_page': 'childcares','content': results, 'page_number': int(pageNumber), 'pages': range(pages)})
-<<<<<<< HEAD
-=======
-
-def filter(request):
-    return render(request, 'ChildCares/index.html', {'active_page': 'childcares', 'content': ["FILTERED DATA HERE"]})
->>>>>>> origin/master
 
 def moreinfo(request):
     #
