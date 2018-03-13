@@ -1,3 +1,72 @@
-{% extends "common/header.html" %} {% block content %}
-<p>Contact</p>
+{% extends "common/header.html" %} 
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <div class="row mb-4">
+                
+                <h3>Contact Information</h3>
+            </div>
+            <div class="row mb-0 p-3">
+                You can reach us at the following:
+            </div>
+            <div class="row mb-4">
+                <p class="border rounded p-3">
+                    <b>Telephone:</b> 6789 1234</br>
+                    <b>Email Address:</b> admin@villians.ntu.edu.sg</br>
+                    <b>Address:</b> 123 Orchard Road, Singapore 123123</br>
+                    <b>Office Hours:</b> 9AM - 530PM
+                </p>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <h3>Leave an enquiry</h3>
+            </div>
+            <form class="p0">
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <label for="fname">First name</label>
+                        <input type="text" class="form-control" id="fname" placeholder="" value="" required>
+                        <div class="invalid-feedback">
+                            Please input your first name.
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="lname">Last name</label>
+                        <input type="text" class="form-control" id="lname" placeholder="" value="" required>
+                        <div class="invalid-feedback">
+                            Please input your last name.
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <label for="telephoneNumber">Telephone number</label>
+                        <input type="text" class="form-control" id="telephoneNumber" placeholder="" value="">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="email">Email address</label>
+                        <input type="text" class="form-control" id="email" placeholder="" value="" required>
+                        <div class="invalid-feedback">
+                            Please input your email.
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label for="enquiry">Enquiry</label>
+                        <textarea class="form-control" id="enquiry" aria-placeholder="" aria-valuetext="" aria-label="enquiry"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-2">
+                        <button class="btn btn-primary btn-block" type="submit">Submit Enquiry</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
