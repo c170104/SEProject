@@ -6,6 +6,7 @@
         <thead>
             <tr>
                 <!-- <th scope="col">#</th> -->
+                <th scope="col">Centre Code</th>
                 <th scope="col">Name</th>
                 <th scope="col">Programmes Offered</th>
                 <th scope="col">Food Offered</th>
@@ -13,13 +14,15 @@
                 <th scope="col">Weekday Timing</th>
                 <th scope="col">Gov Subsidy</th>
                 <th scope="col">Postal Code</th>
-                <th scope="col">Click for More Info</th>
+                <th scope="col">Remarks</th>
+                <th scope="col">More Info</th>
             </tr>
         </thead>
         <tbody>
             {% for c in content %}
             <tr>
                 <!-- <th scope="row">{{ forloop.counter }}</th> -->
+                <td>{{ c.centre_code }}</td>
                 <td>{{ c.centre_name }}</td>
                 <td>{{ c.programmes_offered }}</td>
                 <td>{{ c.food_offered }}</td>
@@ -27,7 +30,8 @@
                 <td>{{ c.weekday_full_day }}</td>
                 <td>{{ c.government_subsidy }}</td>
                 <td>{{ c.postal_code }}</td>
-                <td><a href="moreinfo?p={{ page_number }}&amp;i={{ forloop.counter0 }}">Click Here<a/></td>
+                <td>{{ c.citizenship }} </td>
+                <td><a href="moreinfo/?cc={{ c.centre_code }}">Click Here<a/></td>
             </tr>
             {% endfor %}
         </tbody>

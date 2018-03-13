@@ -2,8 +2,47 @@
 
 {% block content %}
     <div class="container">
-        {% for c in content %}
-            {{ c }}
-        {% endfor %}
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ content.0.centre_code }}</h5>
+                        <p class="card-text">
+                            <h6>{{ content.0.centre_name }}</h6> </br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                    <b></b>
+                                </div>
+                                <div class="col-md-4">
+                                    <b>Contact</b></br>
+                                    Tel No. {{ content.0.centre_contact_no }} </br>
+                                    Email {{ content.0.centre_email_address }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                    <b></b>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                    <b></b>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

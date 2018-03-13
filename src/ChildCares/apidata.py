@@ -23,5 +23,7 @@ def combineList(list1, list2):
     for c in list1:
         for i in list2:
             if(c['\ufeffcentre_code'] == i['\ufeffcentre_code']):
+                c['citizenship'] = c['remarks']
                 c.update(i)
+                c['centre_code'] = c['\ufeffcentre_code']
     return list1

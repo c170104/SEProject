@@ -4,13 +4,11 @@ from . import apidata
 import sys
 
 # Create your views here.
-globaldata = None
 
 def index(request):
     # data API
     query = request.GET.get('q', '')
     results = apidata.main(query)
-    globaldata = results
 
     # pagination
     pageNumber = request.GET.get('p', '1')
@@ -27,10 +25,10 @@ def index(request):
 
 def moreinfo(request):
     #
-    getPage = request.GET.get('p', '')
-    getDataId = request.GET.get('i', '')
-    print(globaldata)
-    if(getPage != '' and getDataId != ''):   
-        return render(request, 'ChildCares/moreinfo.html', {'content': globaldata[getPage*20+getDataId]})
+    getCentreCode = request.GET.get('cc', '')
+    results = apidata.main(getCentreCode)
+    if(getCentreCode != ''):   
+        # print(results)
+        return render(request, 'ChildCares/moreinfo.html', {'content': results})
     return redirect('/')
     
