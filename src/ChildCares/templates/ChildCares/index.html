@@ -2,6 +2,41 @@
 
 {% block content %}
 <div class="container">
+    <div class="row mt-4 mb-4">
+        <div class="col-md-6">
+            <div class="row align-items-center">
+                Sort By:
+                <form action="" method="GET">
+                    <div class="dropdown ml-4">
+                        <button class="btn btn-dark dropdown-toggle" type="button" aria-label="dropdownMenuButton" id="downdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Options
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <button class="dropdown-item {% if sort == 'cc' or sort == '' %} active {% endif %}" type="submit" name="s" value="cc">Centre Code</button>
+                            <button class="dropdown-item {% if sort == 'name' %} active {% endif %}" type="submit" name="s" value="name" >Name</button>
+                            <button class="dropdown-item {% if sort == 'fee' %} active {% endif %}" type="submit" name="s" value="fee" >Fees</button>
+                            <button class="dropdown-item {% if sort == 'programme' %} active {% endif %}" type="submit" name="s" value="programme">Programmes Offered</button>
+                            <button class="dropdown-item {% if sort == 'time' %} active {% endif %}" type="submit" name="s" value="time" >Timing</button>
+                        </div>
+                        <input type="hidden" name="p" value="{% if page_number %}{{ page_number }}{% endif %}"/>
+                        <input type="hidden" name="q" value="{% if query %}{{ query }}{% endif %}"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <form class="form-group" action="" method="GET">
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search" name="q">
+                    </div>
+                    <div class="col col-md-2">
+                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>        
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -40,23 +75,20 @@
     <nav aria-label="...">
         <ul class="pagination">
             <li class="page-item {% if page_number == '1' %} disabled {% endif %}">
-                <a class="page-link" href="{% if page_number > 1 %} ?p={{ page_number|add:'-1'}} {% else %} # {% endif %}" tabindex="-1">Previous</a>
+                <a class="page-link" href="{% if page_number > 1 %} ?p={{ page_number|add:'-1'}}&q={{ query}} {% else %} ?q={{ query }} {% endif %}" tabindex="-1">Previous</a>
             </li>
             {% for i in pages %}
             <li class="page-item {% if i|add:'1' == page_number %} active {% endif %}">
-                <a class="page-link" href="?p={{ i|add:'1' }}">{{ i|add:'1' }}</a>
+                <a class="page-link" href="?p={{ i|add:'1' }}&q={{ query }}">{{ i|add:'1' }}</a>
             </li>
 
                 {% if forloop.last %}
                 <li class="page-item {% if page_number == i|add:'1' %} disabled {% endif %}">
-                    <a class="page-link" href="{% if page_number == i|add:'1' %} # {% else %} ?p={{ page_number|add:'1' }} {% endif %}">Next</a>
+                    <a class="page-link" href="{% if page_number == i|add:'1' %} ?q={{ query }} {% else %} ?p={{ page_number|add:'1' }}&q={{ query }} {% endif %}">Next</a>
                 </li>
                 {% endif %}
             {% endfor %}
         </ul>
     </nav>
-
-    
-
 </div>
 {% endblock %}
