@@ -4,19 +4,30 @@
 <div class="container">
     <div class="row mt-5 mb-5 justify-content-around">
         <div class="col col-lg-6">
+            {% if success_msg %} 
+                <div class="alert alert-success" role="alert">
+                    {{ success_msg }}
+                </div>
+            {% endif %}
+            {% if error_msg %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error_msg }}
+                </div>
+            {% endif %}
             <h3 class="mb-4">Leave an enquiry</h3>
-            <form>
+            <form action="" method="POST">
+                {% csrf_token %}
                 <div class="row mb-4">
                     <div class="col">
                         <label for="fname">First name</label>
-                        <input type="text" class="form-control" id="fname" placeholder="" value="" required>
+                        <input type="text" class="form-control" name="fname" placeholder="" value="" required>
                         <div class="invalid-feedback">
                             Please input your first name.
                         </div>
                     </div>
                     <div class="col">
                         <label for="lname">Last name</label>
-                        <input type="text" class="form-control" id="lname" placeholder="" value="" required>
+                        <input type="text" class="form-control" name="lname" placeholder="" value="" required>
                         <div class="invalid-feedback">
                             Please input your last name.
                         </div>
@@ -24,12 +35,15 @@
                 </div>
                 <div class="row mb-4">
                     <div class="col">
-                        <label for="telephoneNumber">Telephone number</label>
-                        <input type="text" class="form-control" id="telephoneNumber" placeholder="" value="">
+                        <label for="subject">Subject</label>
+                        <input type="text" class="form-control" name="subject" placeholder="" value="" required>
+                        <div class="invalid-feedback">
+                            Please input a subject.
+                        </div>
                     </div>
                     <div class="col">
                         <label for="email">Email address</label>
-                        <input type="text" class="form-control" id="email" placeholder="" value="" required>
+                        <input type="text" class="form-control" name="email" placeholder="" value="" required>
                         <div class="invalid-feedback">
                             Please input your email.
                         </div>
@@ -38,7 +52,7 @@
                 <div class="row mb-4">
                     <div class="col">
                         <label for="enquiry">Enquiry</label>
-                        <textarea class="form-control" id="enquiry" aria-placeholder="" aria-valuetext="" aria-label="enquiry" rows="4"></textarea>                        
+                        <textarea class="form-control" name="enquiry" aria-placeholder="" aria-valuetext="" aria-label="enquiry" rows="4" required></textarea>                        
                     </div>
                 </div>
                 <div class="row mb-4">
