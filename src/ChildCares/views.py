@@ -8,7 +8,8 @@ import sys
 def index(request):
     # data API
     query = request.GET.get('q', '')
-    results = apidata.main(query)
+    sort = request.GET.get('s', '')
+    results = apidata.main(query, sort)
 
     # pagination
     pageNumber = request.GET.get('p', '1')
@@ -21,12 +22,12 @@ def index(request):
     pages = int(len(results) / 20)
     results = results[itemStart:itemEnd]
     
-    return render(request, 'ChildCares/index.html', {'active_page': 'childcares','content': results, 'page_number': int(pageNumber), 'pages': range(pages)})
+    return render(request, 'ChildCares/index.html', {'active_page': 'childcares','content': results, 'page_number': pageNumber, 'pages': range(pages), 'query': query, 'sort': sort})
 
 def moreinfo(request):
     #
     getCentreCode = request.GET.get('cc', '')
-    results = apidata.main(getCentreCode)
+    results = apidata.main(getCentreCode, '')
     if(getCentreCode != ''):   
         # print(results)
         return render(request, 'ChildCares/moreinfo.html', {'content': results})

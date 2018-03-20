@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% load staticfiles  %}
     <link rel='stylesheet' href="{% static 'common/css/bootstrap.min.css' %}" type='text/css' />
-    <script src="{% static 'common/js/bootstrap.min.js' %}" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'common/js/bootstrap.bundle.js' %}"></script>
 
     <Title>ChildCareApp</Title>
 </head>
@@ -29,10 +30,6 @@
                 <a class="nav-link" href="/contact">Contact Us</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
     </nav>
 
     <main role="main">
@@ -42,7 +39,14 @@
     <hr>
 
     <footer class="container">
-        NTU Software Engineering Project Villians
+        <div class="row">
+            <div class="col">
+                <i>NTU CZ2002 2017/18 Semester 2<br>Software Engineering Project<br><b>Team Villians</b></i>
+            </div>
+            <div class="col text-right">
+                Join us on telegram!
+            </div>
+        </div>
     </footer>
 </body>
 
