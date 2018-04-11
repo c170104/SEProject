@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from . import apidata
-
+import urllib
 import sys
 
 # Create your views here.
@@ -9,7 +9,7 @@ def index(request):
     # data API
     query = request.GET.get('q', '')
     sort = request.GET.get('s', '')
-    results = apidata.main(query, sort)
+    results = apidata.main(urllib.parse.quote_plus(query), sort)
 
     # pagination
     pageNumber = request.GET.get('p', '1')
@@ -19,10 +19,20 @@ def index(request):
     else:
         itemStart = 0
         itemEnd = 20
-    pages = int(len(results) / 20)
+    maxPageNumber= int(len(results) / 20)
+    minPageNumber = 1
+
+    if(maxPageNumber == 0):
+        pages = range(0)
+    elif(int(pageNumber) < 3):
+        pages = range(minPageNumber, int(pageNumber) + 3)
+    elif((maxPageNumber - int(pageNumber)) <= 0):
+        pages = range(int(pageNumber) - 2, maxPageNumber)
+    else:
+        pages = range(int(pageNumber) - 2, int(pageNumber) + 3)
     results = results[itemStart:itemEnd]
     
-    return render(request, 'ChildCares/index.html', {'active_page': 'childcares','content': results, 'page_number': pageNumber, 'pages': range(pages), 'query': query, 'sort': sort})
+    return render(request, 'ChildCares/index.html', {'active_page': 'childcares','content': results, 'page_number': int(pageNumber), 'pages': pages, 'query': query, 'sort': sort})
 
 def moreinfo(request):
     #

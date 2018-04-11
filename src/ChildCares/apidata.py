@@ -1,8 +1,8 @@
 import urllib
 import json
 
-urlwCost = "https://data.gov.sg/api/action/datastore_search?resource_id=0c14ceec-da1b-43c6-92fc-e82d7219840b"
-urlwInfo = "https://data.gov.sg/api/action/datastore_search?resource_id=4fc3fd79-64f2-4027-8d5b-ce0d7c279646"
+urlwCost = "https://data.gov.sg/api/action/datastore_search?resource_id=0c14ceec-da1b-43c6-92fc-e82d7219840b&limit=3000"
+urlwInfo = "https://data.gov.sg/api/action/datastore_search?resource_id=4fc3fd79-64f2-4027-8d5b-ce0d7c279646&limit=1433"
 
 def main(query, sort):
     dataWithCost = apiQuery(urlwCost + "&q=" + query)
