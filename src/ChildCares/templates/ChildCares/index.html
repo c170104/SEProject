@@ -2,6 +2,11 @@
 
 {% block content %}
 <div class="container">
+        {% if error %}
+        <div class="alert alert-danger mt-2" role="alert">
+            {{ error }} 
+        </div>
+        {% endif %}
     <div class="row mt-4 mb-4">
         <div class="col-md-6">
             <div class="row align-items-center">
@@ -12,11 +17,11 @@
                             Options
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item {% if sort == 'cc' or sort == '' %} active {% endif %}" type="submit" name="s" value="cc">Centre Code</button>
-                            <button class="dropdown-item {% if sort == 'name' %} active {% endif %}" type="submit" name="s" value="name" >Name</button>
-                            <button class="dropdown-item {% if sort == 'fee' %} active {% endif %}" type="submit" name="s" value="fee" >Fees</button>
-                            <button class="dropdown-item {% if sort == 'programme' %} active {% endif %}" type="submit" name="s" value="programme">Programmes Offered</button>
-                            <button class="dropdown-item {% if sort == 'time' %} active {% endif %}" type="submit" name="s" value="time" >Timing</button>
+                            <button class="dropdown-item {% if sort == 'centre_code' or sort == '' %} active {% endif %}" type="submit" name="s" value="centre_code">Centre Code</button>
+                            <button class="dropdown-item {% if sort == 'centre_name' %} active {% endif %}" type="submit" name="s" value="centre_name" >Name</button>
+                            <button class="dropdown-item {% if sort == 'centre_area' %} active {% endif %}" type="submit" name="s" value="centre_area" >Area</button>
+                            <button class="dropdown-item {% if sort == 'programmes_offered' %} active {% endif %}" type="submit" name="s" value="programmes_offered">Programmes Offered</button>
+                            <button class="dropdown-item {% if sort == 'centre_postal_code' %} active {% endif %}" type="submit" name="s" value="centre_postal_code" >Postal Code</button>
                         </div>
                         <input type="hidden" name="p" value="{% if page_number %}{{ page_number }}{% endif %}"/>
                         <input type="hidden" name="q" value="{% if query %}{{ query }}{% endif %}"/>
@@ -45,27 +50,22 @@
                 <th scope="col">Name</th>
                 <th scope="col">Programmes Offered</th>
                 <th scope="col">Food Offered</th>
-                <th scope="col">Fees</th>
-                <th scope="col">Weekday Timing</th>
                 <th scope="col">Gov Subsidy</th>
                 <th scope="col">Postal Code</th>
-                <th scope="col">Remarks</th>
+                <th scope="col">Area Region</th>
                 <th scope="col">More Info</th>
             </tr>
         </thead>
         <tbody>
             {% for c in content %}
             <tr>
-                <!-- <th scope="row">{{ forloop.counter }}</th> -->
                 <td>{{ c.centre_code }}</td>
                 <td>{{ c.centre_name }}</td>
                 <td>{{ c.programmes_offered }}</td>
                 <td>{{ c.food_offered }}</td>
-                <td>{{ c.fees }}</td>
-                <td>{{ c.weekday_full_day }}</td>
                 <td>{{ c.government_subsidy }}</td>
-                <td>{{ c.postal_code }}</td>
-                <td>{{ c.citizenship }} </td>
+                <td>{{ c.centre_postal_code }}</td>
+                <td>{{ c.centre_area }} </td>
                 <td><a href="moreinfo/?cc={{ c.centre_code }}">Click Here<a/></td>
             </tr>
             {% endfor %}

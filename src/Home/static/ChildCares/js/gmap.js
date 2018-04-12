@@ -22,7 +22,7 @@ function getLatLng(address) {
 }
 
 window.onload = function()  {
-    var address = document.getElementById('address').innerHTML;
+    var address = document.getElementById('address').innerHTML + this.document.getElementById('postal_code');
     var latLng;
     latLng = (getLatLng(address));
     initMap(latLng);
