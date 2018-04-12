@@ -2,26 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-
-class Price(models.Model):
-    sg_citizen_price = models.FloatField(max_length=8)
-    pr_citizen_price = models.FloatField(max_length=8)
-    fr_citizen_price = models.FloatField(max_length=8)
-
-class Vacancy(models.Model):
-    infant_vacancy = models.CharField(max_length = 50)
-    pg_vacancy = models.CharField(max_length = 50)
-    n1_vacancy = models.CharField(max_length = 50)
-    n2_vacancy = models.CharField(max_length = 50)
-    k1_vacancy = models.CharField(max_length=50)
-    k2_vacancy = models.CharField(max_length=50)
-
-class Timing(models.Model):
-    weekday_full_day = models.CharField(max_length = 20)
-    weekday_halfday_am = models.CharField(max_length = 20)
-    weekday_halfday_pm = models.CharField(max_length = 20)
-    saturday = models.CharField(max_length=20)
-
 class ChildCare(models.Model):
     SECOND_LANGUAGES_OFFERED_CHOICES = (
         ('EN', 'English'),
@@ -45,18 +25,37 @@ class ChildCare(models.Model):
     centre_email_address = models.EmailField(max_length=50)
     centre_address = models.CharField(max_length = 100)
     centre_postal_code = models.CharField(max_length=10)
-    centre_remarks = models.CharField(max_length=50, default="No remarks")
-    prices = models.ForeignKey(Price, on_delete=models.CASCADE)
-    vacancies = models.ForeignKey(Vacancy, on_delete=models.CASCADE)
-    timings = models.ForeignKey(Timing, on_delete=models.CASCADE)
+    centre_area = models.CharField(max_length=20, default="")
 
     def __str__(self):
         return "%s %s" % (self.centre_code, self.centre_name)
 
 
 class Review(models.Model):
+    STAR_CHOICES = (
+        ('1', 1),
+        ('2', 2),
+        ('3', 3),
+        ('4', 4),
+        ('5', 5),
+    )
+
+    childcare = models.ForeignKey(ChildCare, on_delete=models.CASCADE, related_name="reviews")
     reviewer = models.CharField(max_length=50)
     review = models.TextField()
-    childcare = models.ForeignKey(ChildCare, on_delete=models.CASCADE)
+    star = models.IntegerField(choices=STAR_CHOICES, default=0)
 
+class Price(models.Model):
+    childcare = models.ForeignKey(ChildCare, on_delete=models.CASCADE, related_name="prices")
+    citizen = models.CharField(max_length=20, default="")
+    price = models.FloatField(max_length=8, default=0.0)
 
+class Timing(models.Model):
+    childcare = models.ForeignKey(ChildCare, on_delete=models.CASCADE, related_name="timings")
+    day = models.CharField(max_length=30)
+    timing = models.CharField(max_length = 20)
+
+class Vacancy(models.Model):
+    childcare = models.ForeignKey(ChildCare, on_delete=models.CASCADE, related_name="vacancies")
+    vacancy_type = models.CharField(max_length=30)
+    vacancy = models.CharField(max_length=50)

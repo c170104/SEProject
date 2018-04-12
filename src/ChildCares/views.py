@@ -1,71 +1,47 @@
 from django.shortcuts import render, redirect
 from ChildCares.controller import ChildCareController
 import sys
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, InvalidPage
 
 # Create your views here.
 
 def index(request):
+    ccCtrler = ChildCareController()
+
     query = request.GET.get('q', '')
     sort = request.GET.get('s', '')
     pageNumber = request.GET.get('p', '1')
-
-    ccCtrler = ChildCareController()
-
+    
     if(query != ''):
-        results = ccCtrler.search(query)
+            results = ccCtrler.search(query, sort)
     else:
-        results = ccCtrler.get()
-    print(results)
+        results = ccCtrler.get(sort)
+
     pagination = Paginator(results, 20)
-    content = pagination.page(int(pageNumber)).object_list
-    maxPageNumber = pagination.num_pages
-    if(maxPageNumber == 0):
-        pages = range(0)
-    elif(int(pageNumber) < 3):
-        pages = range(1, int(pageNumber) + 3)
-    elif((maxPageNumber - int(pageNumber)) <= 0):
-        pages = range(int(pageNumber) - 2, maxPageNumber)
-    else:
-        pages = range(int(pageNumber) - 2, int(pageNumber) + 3)
+
+    try: 
+        content = pagination.page(int(pageNumber)).object_list
+        maxPageNumber = pagination.num_pages
+        if(maxPageNumber == 0):
+            pages = range(0)
+        elif((maxPageNumber - int(pageNumber)) <= 0):
+            pages = range(int(pageNumber), maxPageNumber+1)
+        else:
+            pages = range(int(pageNumber) - 2, int(pageNumber) + 3)
+    except InvalidPage:
+        content = pagination.page(1).object_list
+        error = "Invalid Page number."
+        return render(request, 'ChildCares/index.html', {'active_page' : 'childcares', 'content': content, 'error': error})
 
     return render(request, 'ChildCares/index.html', {'active_page' : 'childcares', 'content' : content, 'page_number': int(pageNumber), 'pages': pages, 'query' : query, 'sort' : sort})
 
-    
-    # # data API
-    # 
-    # results = apidata.main(urllib.parse.quote_plus(query), sort)
-
-    # # pagination
-    # 
-    # if(pageNumber.isdigit()):
-    #     itemStart = (int(pageNumber)-1) * 20
-    #     itemEnd = itemStart + 20
-    # else:
-    #     itemStart = 0
-    #     itemEnd = 20
-    # maxPageNumber= int(len(results) / 20)
-    # minPageNumber = 1
-
-    # if(maxPageNumber == 0):
-    #     pages = range(0)
-    # elif(int(pageNumber) < 3):
-    #     pages = range(minPageNumber, int(pageNumber) + 3)
-    # elif((maxPageNumber - int(pageNumber)) <= 0):
-    #     pages = range(int(pageNumber) - 2, maxPageNumber)
-    # else:
-    #     pages = range(int(pageNumber) - 2, int(pageNumber) + 3)
-    # results = results[itemStart:itemEnd]
-    
-    # return render(request, 'ChildCares/index.html', {'active_page': 'childcares','content': results, 'page_number': int(pageNumber), 'pages': pages, 'query': query, 'sort': sort})
-
 def moreinfo(request):
-    #
-    # getCentreCode = request.GET.get('cc', '')
-    # results = apidata.main(getCentreCode, '')
-    # if(getCentreCode != ''):   
-    #     # print(results)
-    #     return render(request, 'ChildCares/moreinfo.html', {'content': results})
-    # return redirect('/')
-    return
+    ccCtrler = ChildCareController()
+
+    getCentreCode = request.GET.get('cc', '')
+    childCare = ccCtrler.search(getCentreCode, '', searchType="cc")
+    if(getCentreCode != ''):   
+        # print(results)
+        return render(request, 'ChildCares/moreinfo.html', {'content': childCare})
+    return redirect('/')
     

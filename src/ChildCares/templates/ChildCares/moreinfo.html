@@ -20,7 +20,7 @@
                                 <b>Food Offered</b></br>
                                 {{ content.0.food_offered }} </br>
                                 <b>Second Language Offered</b> </br>
-                                {{ content.0.second_languages_offered }} </br>
+                                {{ content.0.get_second_languages_offered_display }} </br>
                                 <b>Spark Certified</b></br>
                                 {{ content.0.spark_certified }} </br>
                                 <b>Scheme Type</b> </br>
@@ -35,10 +35,10 @@
                     <div class="container mb-4">
                         <h4>Fees</h4>
                         <div class="row">
-                        {% for c in content %}
+                        {% for c in content.0.prices.all %}
                             <div class="col-sm">
-                                <b>{{ c.citizenship }}</b></br>
-                                {{ c.fees }}
+                                <b>{{ c.citizen }}</b></br>
+                                ${{ c.price }}
                             </div>
                         {% endfor %}
                         </div>
@@ -46,55 +46,23 @@
                     <div class="container mb-4">
                         <h4>Vacancy</h4>
                         <div class="row">
+                        {% for c in content.0.vacancies.all %}
                             <div class="col-sm">
-                                <b>Infant</b></br>
-                                {{ content.0.infant_vacancy }}
+                                <b>{{ c.vacancy_type }}</b></br>
+                                {{ c.vacancy }}
                             </div>
-                            <div class="col-sm">
-                                <b>PG</b></br>
-                                {{content.0.pg_vacancy}}
-                            </div>
-                            <div class="col-sm">
-                                <b>N1</b>
-                                </br>
-                                {{content.0.n1_vacancy}}
-                            </div>
-                            <div class="col-sm">
-                                <b>N2</b>
-                                </br>
-                                {{content.0.n2_vacancy}}
-                            </div>
-                            <div class="col-sm">
-                                <b>K1</b>
-                                </br>
-                                {{content.0.k1_vacancy}}
-                            </div>
-                            <div class="col-sm">
-                                <b>K2</b>
-                                </br>
-                                {{content.0.k2_vacancy}}
-                            </div>
+                        {% endfor %}
                         </div>
                     </div>
                     <div class="container mb-4">
                         <h4>Timings</h4>
                         <div class="row">
+                        {% for c in content.0.timings.all %}
                             <div class="col-md-3">
-                                <b>Weekday Full Day</b> </br>
-                                {{ content.0.weekday_full_day }}
+                                <b>{{ c.day }}</b> </br>
+                                {{ c.timing }}
                             </div>
-                            <div class="col-md-3">
-                                <b>Weekday Halfday (AM)</b></br>
-                                {{ content.0.weekday_halfday_am }}
-                            </div>
-                            <div class="col-md-3">
-                                <b>Weekday Halfday (PM)</b></br>
-                                {{ content.0.weekday_halfday_pm }}
-                            </div>
-                            <div class="col-md-3">
-                                <b>Saturday</b></br>
-                                {{ content.0.saturday }}
-                            </div>
+                        {% endfor %}
                         </div>
                     </div>
                     <div class="container mb-4">
@@ -104,7 +72,8 @@
                                 <b>Website:</b> {{ content.0.centre_website }} </br>
                                 <b>Tel No:</b> {{ content.0.centre_contact_no }} </br>
                                 <b>Email:</b> {{ content.0.centre_email_address }} </br>
-                                {% if content.0.centre_address == '' %}<b>Postal Code:</b> SINGAPORE<div id="postal_code">{{ content.0.postal_code }}</div> {% else %}<b>Address:</b> <div id="address">{{ content.0.centre_address }}</div> {% endif %}
+                                <b>Address:</b> <address id="address">{{ content.0.centre_address }}</br></address>
+                                <b>Postal Code:</b> <postalcode id="postal_code">{{ content.0.centre_postal_code }}</br></postalcode>
                             </div>
                         </div>
                     </div>
@@ -114,6 +83,15 @@
                             <div id="map" style="width:1100px; height: 300px;">
                             </div>
                         </div>
+                    </div>
+                    <div class="container mb-4">
+                        <h4>Reviews</h4>
+
+                        {% for c in content.0.reviews.all %}
+                            <div class="row">
+
+                            </div>
+                        {% endfor %}
                     </div>
                 </p>
             </div>
