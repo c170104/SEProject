@@ -129,17 +129,20 @@
                         </form>
                         
                         {% for c in content.0.reviews.all %}
-                        <div class="card">
+                        <div class="card mb-2">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    {{ c.reviewer }} 
-                                    {% if c.star ==  %}
+                                    {{ c.reviewer }}
+                                    <span class="ml-4">
+                                    {% for c in "x"|ljust:c.star %}
+                                        <span class="fa fa-star checked"></span>
+                                    {% endfor %}
+                                    </span>
                                 </h5>
-                                
+                                <p>{{ c.review }}</p>
                             </div>
                         </div>
                         {% endfor %}
-                        
                     </div>
                 </p>
             </div>
