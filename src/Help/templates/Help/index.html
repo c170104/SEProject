@@ -1,0 +1,46 @@
+{% extends "common/header.html" %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+<div class="container">
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">    Step 1: <span class="text-muted">Click on Child Care List tab on the top left corner of the screen</span></h2>     
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="{% static 'help/images/pic1.jpg'%}" >
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-4 order-md-2">
+                <h2 class="featurette-heading">Step 2: <span class="text-muted">Use the search function to search for child care centres in your area</span></h2>
+            </div>
+            <div class="col-md-8 order-md-1">
+                <img class="featurette-image img-fluid mx-auto" src="{% static 'help/images/pic2.jpeg'%}" >
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-4">
+                <h2 class="featurette-heading">    Step 3: <span class="text-muted">Sort the results according to your preferences</span></h2>     
+            </div>
+            <div class="col-md-8">
+                <img class="featurette-image img-fluid mx-auto float-right" src="{% static 'help/images/pic3.jpeg'%}" >
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-4 order-md-2">
+                <h2 class="featurette-heading">Step 4: <span class="text-muted">Click button under More info to view additional information of a particular child care</span></h2>
+            </div>
+            <div class="col-md-8 order-md-1">
+                <img class="featurette-image img-fluid mx-auto" src="{% static 'help/images/pic4.jpeg'%}" >
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
