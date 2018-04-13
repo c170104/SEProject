@@ -36,12 +36,21 @@ def index(request):
     return render(request, 'ChildCares/index.html', {'active_page' : 'childcares', 'content' : content, 'page_number': int(pageNumber), 'pages': pages, 'query' : query, 'sort' : sort})
 
 def moreinfo(request):
+    success = ''
+    error = ''
     ccCtrler = ChildCareController()
 
     getCentreCode = request.GET.get('cc', '')
     childCare = ccCtrler.search(getCentreCode, '', searchType="cc")
+
+    if request.method == 'POST':
+        if not ccCtrler.createReview(request.POST):
+            error = "Review failed, Please try again."
+        else:
+            success = "Review successfully added."
+
     if(getCentreCode != ''):   
         # print(results)
-        return render(request, 'ChildCares/moreinfo.html', {'content': childCare})
+        return render(request, 'ChildCares/moreinfo.html', {'content': childCare, 'success': success, 'error': error,})
     return redirect('/')
     
