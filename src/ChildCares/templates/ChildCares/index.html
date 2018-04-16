@@ -75,16 +75,16 @@
     <nav aria-label="...">
         <ul class="pagination">
             <li class="page-item {% if page_number == '1' %} disabled {% endif %}">
-                <a class="page-link" href="{% if page_number > 1 %} ?p={{ page_number|add:'-1'}}&q={{ query}} {% else %} ?q={{ query }} {% endif %}" tabindex="-1">Previous</a>
+                <a class="page-link" href="{% if page_number > 1 %} ?p={{ page_number|add:'-1'}}&q={{ query }}&s={{ sort }} {% else %} ?q={{ query }}&s={{ sort }} {% endif %}" tabindex="-1">Previous</a>
             </li>
             {% for i in pages %}
             <li class="page-item {% ifequal i page_number %} active {% endifequal %}">
-                <a class="page-link" href="?p={{ i }}&q={{ query }}">{{ i }}</a>
+                <a class="page-link" href="?p={{ i }}&q={{ query }}&s={{ sort }}">{{ i }}</a>
             </li>
 
                 {% if forloop.last %}
                 <li class="page-item {% if page_number == i|add:'1' %} disabled {% endif %}">
-                    <a class="page-link" href="{% if page_number == i|add:'1' %} ?q={{ query }} {% else %} ?p={{ page_number|add:'1' }}&q={{ query }} {% endif %}">Next</a>
+                    <a class="page-link" href="{% if page_number == i|add:'1' %} ?q={{ query }}&s={{ sort }} {% else %} ?p={{ page_number|add:'1' }}&q={{ query }}&s={{ sort }} {% endif %}">Next</a>
                 </li>
                 {% endif %}
             {% endfor %}

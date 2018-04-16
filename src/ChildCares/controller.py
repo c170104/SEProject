@@ -16,7 +16,8 @@ class ChildCareController:
                 Q(centre_code__icontains=query)     |
                 Q(centre_name__icontains=query)     |
                 Q(centre_address__icontains=query)  |
-                Q(centre_postal_code__icontains=query)
+                Q(centre_postal_code__icontains=query)  |
+                Q(centre_area__icontains=query)
             ).order_by(sort)
         elif(searchType == "cc"):
             return ChildCare.objects.filter(centre_code=query).order_by(sort)

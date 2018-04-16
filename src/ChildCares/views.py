@@ -19,21 +19,21 @@ def index(request):
 
     pagination = Paginator(results, 20)
 
-    try: 
+    try:
         content = pagination.page(int(pageNumber)).object_list
         maxPageNumber = pagination.num_pages
         if(maxPageNumber == 0):
             pages = range(0)
-        elif((maxPageNumber - int(pageNumber)) <= 0):
+        elif((maxPageNumber - int(pageNumber)) <= 2):
             pages = range(int(pageNumber), maxPageNumber+1)
         else:
-            pages = range(int(pageNumber) - 2, int(pageNumber) + 3)
+            pages = range(int(pageNumber), maxPageNumber)
     except InvalidPage:
         content = pagination.page(1).object_list
         error = "Invalid Page number."
         return render(request, 'ChildCares/index.html', {'active_page' : 'childcares', 'content': content, 'error': error})
 
-    return render(request, 'ChildCares/index.html', {'active_page' : 'childcares', 'content' : content, 'page_number': int(pageNumber), 'pages': pages, 'query' : query, 'sort' : sort})
+    return render(request, 'ChildCares/index.html', {'active_page' : 'childcares', 'content' : content, 'pages' : pages, 'page_number': int(pageNumber), 'query' : query, 'sort' : sort})
 
 def moreinfo(request):
     success = ''
