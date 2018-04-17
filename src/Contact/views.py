@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from . import form
 from django.core.mail import send_mail
 from smtplib import SMTPException
+from django.utils.html import escape
 
 # Create your views here.
 
@@ -15,11 +16,12 @@ def index(request):
         f = form.contactForm(request.POST)
         if f.is_valid():
             try:
+                email_content = "\nEnquirer Name: " + f.cleaned_data['lname'] + " " + f.cleaned_data['fname'] + "\n\nEnquiry: " + f.cleaned_data['enquiry'] + "\n\n"
                 send_mail(
-                    request.POST.get('subject'),
-                    request.POST.get('enquiry') + request.POST.get('email'),
+                    f.cleaned_data['subject'],
+                    escape(email_content),
                     'test_admin@villians.ntu.edu.sg',
-                    ['randomemail12345@villians.ntu.edu.sg'],
+                    [f.cleaned_data['email']],
                     fail_silently = False,
             )
                 success_msg = "Succesfully sent enquiry. We well get back to you as soon as possible."
