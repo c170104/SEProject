@@ -51,6 +51,6 @@ def moreinfo(request):
 
     if(getCentreCode != ''):   
         # print(results)
-        return render(request, 'ChildCares/moreinfo.html', {'content': childCare, 'success': success, 'error': error,})
+        return render(request, 'ChildCares/moreinfo.html', {'active_page' : 'childcares', 'content': childCare, 'success': success, 'error': error,})
     return redirect('/')
     
